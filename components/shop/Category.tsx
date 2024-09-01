@@ -9,15 +9,19 @@ export default function Category({
   id,
   name,
   image,
+  onSelect,
+  select,
 }: {
   id: number;
   name: string;
   image: any;
+  onSelect: (name: string) => void;
+  select: string;
 }) {
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={() => onSelect(name)}>
       <Image
-        style={styles.image}
+        style={[styles.image, select === name && styles.select]}
         source={image}
         placeholder={{ blurhash }}
         contentFit="cover"
@@ -30,13 +34,18 @@ export default function Category({
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    marginRight: 20,
+    alignItems: "center",
+    marginRight: 30,
   },
   image: {
     width: 55,
     height: 55,
     marginBottom: 7,
+  },
+  select: {
+    borderRadius: 27,
+    borderColor: "orange",
+    borderWidth: 2,
   },
   text: {
     fontSize: 12,
